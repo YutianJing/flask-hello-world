@@ -1,0 +1,76 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}flask-hello-world{% endblock %}
+
+
+
+{% block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-collapse" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only"> Yutian navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">Yutian</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1>Hello, {% if name %}{{name}}{% else %}guest!{% endif %}</h1>
+    </div>
+</div>
+
+<div class="container">
+    {% if known %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        failure, user is existing!
+    </div>
+    {% else %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        create new user successful!
+    </div>
+    {% endif %}
+</div>
+
+<div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% block page_content %}{% endblock %}
+</div>
+{{ wtf.quick_form(form) }}
+{% endblock %}
+
+
+
+<!-- <html>
+  <head>
+    {% if title %}
+    <title>{{title}}</title>
+    {% else %}
+    <title>Welcome to flask-hello-world</title>
+    {% endif %}
+  </head>
+  <body>
+      <h1>Hello, {{user.username}}!</h1>
+  </body>
+</html> -->
